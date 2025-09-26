@@ -42,6 +42,53 @@ Genius Foundation Ecosystem
 - **Funding**: $6M Seed Round (2024)
 - **Security Investment**: $30,000+ in professional audits & competitions
 
+## 🔐 Key Infrastructure: Turnkey Integration
+
+[**Turnkey.com**](https://www.turnkey.com/) serves as the critical **non-custodial key management infrastructure** for the Genius ecosystem, providing enterprise-grade security for user wallets and private keys.
+
+### 🛡️ What is Turnkey?
+
+Turnkey is a leading **non-custodial key management platform** that enables secure wallet creation, transaction signing, and onchain automation without ever exposing private keys. Built by the team that created **Coinbase Custody**, Turnkey provides cryptographic security from first principles.
+
+### 🔧 Turnkey's Role in Genius
+
+| **Function** | **Implementation** | **Security Benefit** |
+|-------------|-------------------|---------------------|
+| **Wallet Generation** | Secure enclave-based key creation | Users retain full control of private keys |
+| **Transaction Signing** | Hardware-secured signing process | No private key exposure during operations |
+| **Authentication** | OAuth, passkeys, biometric auth | Seamless UX without compromising security |
+| **Policy Engine** | Granular permission controls | Automated risk management and compliance |
+| **Multi-Chain Support** | EVM + Solana key management | Unified security across all supported chains |
+
+### 🏭 Enterprise-Grade Security Features
+
+- **🔒 Trusted Hardware**: All operations run in secure enclaves (TEEs)
+- **🔍 Verifiable**: Open-source code with cryptographic proof
+- **📋 Compliance**: SOC 2 Type II certified
+- **🛡️ Audited**: Multiple security audits by Trail of Bits, Cure53, Zellic, Distrust
+- **⚡ Performance**: Lightning-fast signing at scale
+
+### 🤝 Turnkey + Lit Protocol Architecture
+
+The Genius system combines **Turnkey** and **Lit Protocol** for comprehensive non-custodial operations:
+
+```
+User Authentication (Turnkey) → Decentralized Execution (Lit Protocol) → Cross-Chain Operations
+├── 🔐 Secure Key Management         ├── ⚡ Programmable Key Pairs (PKPs)    ├── 🌉 Bridge Operations  
+├── 🛡️ Hardware Security Modules    ├── 🔒 Encrypted Solana Keys           ├── 💱 DEX Aggregation
+├── 📱 Biometric Authentication     ├── 🤖 Automated Orchestration         ├── 🔄 Liquidity Rebalancing
+└── 🎯 Policy-Based Controls        └── 🧾 Signature Verification           └── 💸 Fee Management
+```
+
+### 🌟 Production Benefits for TradeGenius.com Users
+
+- **🚀 Seamless Onboarding**: No seed phrases or complex wallet setup
+- **🔐 Maximum Security**: Private keys never leave secure enclaves  
+- **⚡ Fast Execution**: Sub-second transaction signing
+- **🌍 Multi-Chain**: Single interface for all supported blockchains
+- **📱 Mobile-First**: Biometric authentication for mobile trading
+- **🛡️ Enterprise-Grade**: Same security used by major crypto institutions
+
 ## 📁 Repository Structure
 
 ### 🔧 Genius EVM Contracts (`genius-contracts/`)
@@ -137,10 +184,12 @@ The relationship between this repository and [TradeGenius.com](https://www.trade
 - **Genius Foundation**: Development organization for this protocol
 - **Consistent Branding**: Unified "Genius" ecosystem across all platforms
 
-### 🛡️ Security Alignment  
-- **Audit Firms Match**: Halborn, Hacken, Cantina, Borg Research, HackenProof
-- **Production Security**: Live platform uses audited smart contracts from this repository
-- **Key Management**: Turnkey.com + Lit Protocol for non-custodial operations
+### 🛡️ Infrastructure Security Alignment  
+- **Smart Contract Audits**: Halborn, Hacken, Cantina, Borg Research, HackenProof
+- **Turnkey Security Audits**: Trail of Bits, Cure53, Zellic, Distrust, SOC 2 Type II
+- **Production Security**: Live platform uses audited smart contracts + Turnkey infrastructure
+- **Non-Custodial Verification**: TradeGenius.com FAQ explicitly confirms Turnkey integration
+- **Key Management**: Enterprise-grade Turnkey.com + Lit Protocol for decentralized operations
 
 ## 🚀 Build Instructions
 
@@ -193,7 +242,9 @@ solana program deploy target/deploy/genius.so --program-id --with-compute-unit-p
 - **[Bridge Application](https://app.bridgesmarter.com/)** - Direct bridge interface
 - **[Documentation](http://docs.tradegenius.com/)** - Technical documentation
 
-### 🛡️ Security & Development
+### 🛡️ Security & Infrastructure
+- **[Turnkey.com](https://www.turnkey.com/)** - Non-custodial key management infrastructure
+- **[Turnkey Documentation](https://docs.turnkey.com/)** - Technical integration docs
 - **[Cantina Competition](https://cantina.xyz/competitions/12acc80c-4e4c-4081-a0a3-faa92150651a)** - Security competition details
 - **[Code Walkthrough Video](https://youtu.be/1AVFPtIt334)** - Technical walkthrough
 - **[Lit Protocol Docs](https://developer.litprotocol.com/sdk/serverless-signing/overview)** - Lit Protocol documentation
