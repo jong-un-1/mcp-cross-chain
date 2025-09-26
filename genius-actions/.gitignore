@@ -1,0 +1,8 @@
+node_modules
+dist
+.env
+minified
+meta.json
+
+.DS_Store
+dist

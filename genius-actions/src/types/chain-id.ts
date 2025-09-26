@@ -1,0 +1,17 @@
+export enum ChainId {
+  UNKNOWN = 0,
+  BASE = 8453,
+  SOLANA = 1399811149,
+  ARBITRUM = 42161,
+  OPTIMISM = 10,
+  POLYGON = 137,
+  BSC = 56,
+  AVALANCHE = 43114,
+  ETHEREUM = 1,
+  SONIC = 146,
+}
+
+export enum CHAIN_TYPE {
+  EVM = 'EVM',
+  SOLANA = 'SOLANA',
+}
