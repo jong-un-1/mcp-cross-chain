@@ -1,0 +1,260 @@
+# ==================================================
+# Cross-Chain DEX Backend - Microservices Architecture
+# ==================================================
+# This configuration supports the new microservices architecture:
+# - Keeper: Scheduled tasks and automation
+# - Funder: Address funding management  
+# - Indexer: Blockchain data indexing
+# - Watcher: Monitoring and metrics
+# - Quoter: Price quotes and liquidity
+#
+# Setup Instructions:
+# 1. Replace YOUR_*_HERE placeholders with actual values
+# 2. Create resources: npm run setup
+# 3. Run migrations: npm run migrate:local
+# 4. Initialize data: npm run db:init
+# 5. Set secrets: wrangler secret put KEY
+# 6. Deploy: npm run deploy
+# ==================================================
+
+name = "cross-chain-dex-backend"
+main = "src/index.ts"
+compatibility_date = "2025-06-20"
+compatibility_flags = ["nodejs_compat"]
+
+# Replace with your Cloudflare account ID
+account_id = "ec9b597fa02615ca6a0e62b7ff35d0cc"
+
+# ✅ Scheduled Jobs - Microservices automation
+[triggers]
+crons = [
+  "*/30 * * * * *",  # Every 30 seconds - Keeper: Check pending orders
+  "*/2 * * * *",     # Every 2 minutes - Keeper: Update funding status  
+  "*/5 * * * *",     # Every 5 minutes - Keeper: Rebalance liquidity
+  "*/1 * * * *",     # Every minute - Indexer: Sync blockchain data
+  "*/3 * * * *",     # Every 3 minutes - Watcher: Collect metrics
+  "0 * * * *",       # Every hour - Quoter: Update price feeds
+  "0 2 * * *"        # Daily at 2 AM - Cleanup and maintenance
+]
+
+# ✅ Logging configuration - Enable Workers logs
+# This enables automatic logging in Cloudflare Workers dashboard
+[observability]
+enabled = true
+
+# ✅ Environment variables - Microservices configuration
+[vars]
+# Basic configuration
+NODE_ENV = "production"
+SERVICE_ARCHITECTURE = "microservices"
+SERVICE_VERSION = "3.0.0"
+
+# Logging configuration
+LOG_LEVEL = "info"
+ENABLE_CONSOLE_LOGS = "true"
+ENABLE_STRUCTURED_LOGS = "true"
+
+# Blockchain RPC URLs (replace with your actual URLs)
+ETHEREUM_RPC_URL = "https://eth-mainnet.g.alchemy.com/v2/YOUR_ALCHEMY_KEY"
+BSC_RPC_URL = "https://bsc-dataseed1.binance.org"
+POLYGON_RPC_URL = "https://polygon-rpc.com"
+ARBITRUM_RPC_URL = "https://arb1.arbitrum.io/rpc"
+OPTIMISM_RPC_URL = "https://mainnet.optimism.io"
+SOLANA_RPC_URL = "https://api.mainnet-beta.solana.com"
+
+# GraphQL and Subgraph configuration
+SUBGRAPH_URL = "https://api.studio.thegraph.com/query/114739/enty-square-bsc/version/latest"
+SUBGRAPH_HEALTH_URL = "https://indexer.upgrade.thegraph.com/status"
+
+# External services
+LIT_NETWORK_RPC = "https://lit-protocol-rpc-url.com"
+PROMETHEUS_ENDPOINT = "https://your-prometheus-endpoint.com"
+
+# Jupiter API configuration (for Solana integration)
+JUPITER_API_BASE_URL = "https://api.jup.ag/ultra"
+JUPITER_LITE_API_BASE_URL = "https://lite-api.jup.ag"
+JUPITER_LEND_API_BASE_URL = "https://dev.jup.ag"
+
+# Microservices configuration
+MIN_ETH_BALANCE = "0.01"
+MIN_SOL_BALANCE = "0.1"
+MAX_FUNDING_AMOUNT = "1.0"
+CACHE_TTL_SECONDS = "300"
+CACHE_STRATEGY = "microservices"
+RATE_LIMIT_RPM = "1000"
+RATE_LIMIT_BURST = "100"
+
+# Network Configurations
+# Solana - Helius RPC
+SOLANA_RPC_URL = "https://mainnet.helius-rpc.com/?api-key=3e4462af-f2b9-4a36-9387-a649c63273d3"
+SOLANA_DEVNET_RPC_URL = "https://devnet.helius-rpc.com/?api-key=3e4462af-f2b9-4a36-9387-a649c63273d3"
+SOLANA_CLUSTER = "mainnet-beta"
+
+# BSC - Infura
+BSC_MAINNET_RPC_URL = "https://bsc-mainnet.infura.io/v3/402b910bd7e24d2a866ac48ab3741e75"
+BSC_TESTNET_RPC_URL = "https://bsc-testnet.infura.io/v3/402b910bd7e24d2a866ac48ab3741e75"
+
+# ⚠️ Sensitive information should use secrets instead of vars
+# Run this command to set secret:
+# wrangler secret put SUBGRAPH_AUTH_TOKEN
+# （输入你的 Bearer token，例如 <The Graph Api KEY> ）
+
+# 🔧 Production AI binding - Enabled for AI functionality
+[ai]
+binding = "AI"
+
+# ✅ Database configuration - Microservices ready
+[[d1_databases]]
+binding = "DEFI_DB"  # Updated binding name for microservices
+database_name = "cross-chain-dex-db"
+database_id = "2a6573b6-d961-4b68-b907-2c1cb6640329"
+migrations_dir = "drizzle"
+
+# ✅ R2 storage binding - For microservices file storage
+[[r2_buckets]]
+binding = "DEFI_R2"  # Updated binding name for microservices
+bucket_name = "dex-storage"
+
+# ✅ KV Namespaces for microservices caching
+[[kv_namespaces]]
+binding = "DEFI_KV"  # Updated binding name for microservices
+id = "f68574afd1684065b575ca4635be1050"
+preview_id = "df3f475a32684aaf9843e876628171ca"
+
+[durable_objects]
+bindings = [
+  { name = "MCP_OBJECT", class_name = "D1Agent" }
+  # { name = "SANDBOX_SHELL_CONTAINER", class_name = "SandboxShellContainer" }  # Disabled for dev
+]
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["D1Agent"]
+
+[[migrations]]
+tag = "v2"
+new_sqlite_classes = []
+
+# [[containers]]
+# class_name = "SandboxShellContainer"
+# image = "./Dockerfile"
+# instances = 5
+# name = "sandbox-shell"
+
+# 🔧 Development environment configuration (minimal for testing)
+[env.development]
+[env.development.vars]
+NODE_ENV = "development"
+LOG_LEVEL = "debug"
+ENABLE_CONSOLE_LOGS = "true"
+ENABLE_STRUCTURED_LOGS = "true"
+# Development can use different RPC endpoints or test networks
+SUBGRAPH_URL = "https://api.studio.thegraph.com/query/114739/mars-dex-bsc-testnet/version/latest"
+SUBGRAPH_HEALTH_URL = "https://indexer.upgrade.thegraph.com/status"
+
+# Jupiter API configuration for development
+JUPITER_API_BASE_URL = "https://api.jup.ag/ultra"
+JUPITER_LITE_API_BASE_URL = "https://lite-api.jup.ag"
+JUPITER_LEND_API_BASE_URL = "https://dev.jup.ag"
+
+# Network Configurations for Development
+# Solana - Helius RPC
+SOLANA_RPC_URL = "https://mainnet.helius-rpc.com/?api-key=3e4462af-f2b9-4a36-9387-a649c63273d3"
+SOLANA_DEVNET_RPC_URL = "https://devnet.helius-rpc.com/?api-key=3e4462af-f2b9-4a36-9387-a649c63273d3"
+SOLANA_CLUSTER = "mainnet-beta"
+
+# BSC - Infura
+BSC_MAINNET_RPC_URL = "https://bsc-mainnet.infura.io/v3/402b910bd7e24d2a866ac48ab3741e75"
+BSC_TESTNET_RPC_URL = "https://bsc-testnet.infura.io/v3/402b910bd7e24d2a866ac48ab3741e75"
+
+[env.development.ai]
+binding = "AI"
+
+[[env.development.d1_databases]]
+binding = "D1_DATABASE"
+database_name = "d1-dex-database"
+database_id = "2a6573b6-d961-4b68-b907-2c1cb6640329"
+migrations_dir = "drizzle"
+
+[[env.development.r2_buckets]]
+binding = "R2"
+bucket_name = "dex-storage"
+
+[[env.development.kv_namespaces]]
+binding = "KV"
+id = "df3f475a32684aaf9843e876628171ca"
+
+[env.development.durable_objects]
+bindings = [
+  { name = "MCP_OBJECT", class_name = "D1Agent" }
+]
+
+# ✅ Production environment configuration
+[env.production]
+[env.production.vars]
+NODE_ENV = "production"
+LOG_LEVEL = "warn"
+ENABLE_CONSOLE_LOGS = "false"
+ENABLE_STRUCTURED_LOGS = "true"
+SUBGRAPH_URL = "https://api.studio.thegraph.com/query/114739/enty-square-bsc/version/latest"
+SUBGRAPH_HEALTH_URL = "https://indexer.upgrade.thegraph.com/status"
+
+# Jupiter API configuration for production
+JUPITER_API_BASE_URL = "https://api.jup.ag/ultra"
+JUPITER_LITE_API_BASE_URL = "https://lite-api.jup.ag" 
+JUPITER_LEND_API_BASE_URL = "https://dev.jup.ag"
+
+# Network Configurations for Production
+# Solana - Helius RPC
+SOLANA_RPC_URL = "https://mainnet.helius-rpc.com/?api-key=3e4462af-f2b9-4a36-9387-a649c63273d3"
+SOLANA_DEVNET_RPC_URL = "https://devnet.helius-rpc.com/?api-key=3e4462af-f2b9-4a36-9387-a649c63273d3"
+SOLANA_CLUSTER = "mainnet-beta"
+
+# BSC - Infura
+BSC_MAINNET_RPC_URL = "https://bsc-mainnet.infura.io/v3/402b910bd7e24d2a866ac48ab3741e75"
+BSC_TESTNET_RPC_URL = "https://bsc-testnet.infura.io/v3/402b910bd7e24d2a866ac48ab3741e75"
+
+[env.production.ai]
+binding = "AI"
+
+[[env.production.r2_buckets]]
+binding = "R2"
+bucket_name = "dex-storage"
+
+[[env.production.kv_namespaces]]
+binding = "DEFI_KV"  # Updated for microservices
+id = "f68574afd1684065b575ca4635be1050"
+
+# ✅ Analytics and monitoring for microservices
+[analytics_engine_datasets]
+binding = "ANALYTICS"
+
+# ✅ Performance limits for microservices
+[limits]
+cpu_ms = 30000       # 30 seconds max CPU time for heavy operations
+memory_mb = 128      # 128 MB memory limit
+
+# ✅ Smart placement for better performance
+[placement]
+mode = "smart"
+
+# ✅ Development environment configuration
+[env.development]
+NODE_ENV = "development"
+SERVICE_VERSION = "3.0.0-dev"
+
+[env.development.vars]
+CACHE_TTL_SECONDS = "60"
+RATE_LIMIT_RPM = "10000"
+
+# Development KV namespace
+[[env.development.kv_namespaces]]
+binding = "DEFI_KV"
+id = "YOUR_DEV_KV_NAMESPACE_ID_HERE"
+preview_id = "YOUR_DEV_KV_PREVIEW_NAMESPACE_ID_HERE"
+
+# Development D1 database
+[[env.development.d1_databases]]  
+binding = "DEFI_DB"
+database_name = "cross-chain-dex-db-dev"
+database_id = "YOUR_DEV_D1_DATABASE_ID_HERE"
