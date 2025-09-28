@@ -17,10 +17,7 @@
     "noUncheckedIndexedAccess": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "types": [
-      "@cloudflare/workers-types"
-    ]
+    "resolveJsonModule": true
   },
   "include": [
     "src/**/*"

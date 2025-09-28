@@ -60,7 +60,7 @@ BSC_RPC_URL = "https://bsc-dataseed1.binance.org"
 POLYGON_RPC_URL = "https://polygon-rpc.com"
 ARBITRUM_RPC_URL = "https://arb1.arbitrum.io/rpc"
 OPTIMISM_RPC_URL = "https://mainnet.optimism.io"
-SOLANA_RPC_URL = "https://api.mainnet-beta.solana.com"
+SOLANA_RPC_URL = "https://mainnet.helius-rpc.com/?api-key=3e4462af-f2b9-4a36-9387-a649c63273d3"
 
 # GraphQL and Subgraph configuration
 SUBGRAPH_URL = "https://api.studio.thegraph.com/query/114739/enty-square-bsc/version/latest"
@@ -85,8 +85,7 @@ RATE_LIMIT_RPM = "1000"
 RATE_LIMIT_BURST = "100"
 
 # Network Configurations
-# Solana - Helius RPC
-SOLANA_RPC_URL = "https://mainnet.helius-rpc.com/?api-key=3e4462af-f2b9-4a36-9387-a649c63273d3"
+# Solana - Helius RPC (already defined above)
 SOLANA_DEVNET_RPC_URL = "https://devnet.helius-rpc.com/?api-key=3e4462af-f2b9-4a36-9387-a649c63273d3"
 SOLANA_CLUSTER = "mainnet-beta"
 
@@ -143,11 +142,15 @@ new_sqlite_classes = []
 
 # 🔧 Development environment configuration (minimal for testing)
 [env.development]
-[env.development.vars]
 NODE_ENV = "development"
+SERVICE_VERSION = "3.0.0-dev"
+
+[env.development.vars]
 LOG_LEVEL = "debug"
 ENABLE_CONSOLE_LOGS = "true"
 ENABLE_STRUCTURED_LOGS = "true"
+CACHE_TTL_SECONDS = "60"
+RATE_LIMIT_RPM = "10000"
 # Development can use different RPC endpoints or test networks
 SUBGRAPH_URL = "https://api.studio.thegraph.com/query/114739/mars-dex-bsc-testnet/version/latest"
 SUBGRAPH_HEALTH_URL = "https://indexer.upgrade.thegraph.com/status"
@@ -158,8 +161,7 @@ JUPITER_LITE_API_BASE_URL = "https://lite-api.jup.ag"
 JUPITER_LEND_API_BASE_URL = "https://dev.jup.ag"
 
 # Network Configurations for Development
-# Solana - Helius RPC
-SOLANA_RPC_URL = "https://mainnet.helius-rpc.com/?api-key=3e4462af-f2b9-4a36-9387-a649c63273d3"
+# Solana - Helius RPC (inherited from main vars)
 SOLANA_DEVNET_RPC_URL = "https://devnet.helius-rpc.com/?api-key=3e4462af-f2b9-4a36-9387-a649c63273d3"
 SOLANA_CLUSTER = "mainnet-beta"
 
@@ -205,8 +207,7 @@ JUPITER_LITE_API_BASE_URL = "https://lite-api.jup.ag"
 JUPITER_LEND_API_BASE_URL = "https://dev.jup.ag"
 
 # Network Configurations for Production
-# Solana - Helius RPC
-SOLANA_RPC_URL = "https://mainnet.helius-rpc.com/?api-key=3e4462af-f2b9-4a36-9387-a649c63273d3"
+# Solana - Helius RPC (inherited from main vars)
 SOLANA_DEVNET_RPC_URL = "https://devnet.helius-rpc.com/?api-key=3e4462af-f2b9-4a36-9387-a649c63273d3"
 SOLANA_CLUSTER = "mainnet-beta"
 
@@ -226,7 +227,7 @@ binding = "DEFI_KV"  # Updated for microservices
 id = "f68574afd1684065b575ca4635be1050"
 
 # ✅ Analytics and monitoring for microservices
-[analytics_engine_datasets]
+[[analytics_engine_datasets]]
 binding = "ANALYTICS"
 
 # ✅ Performance limits for microservices
@@ -238,14 +239,7 @@ memory_mb = 128      # 128 MB memory limit
 [placement]
 mode = "smart"
 
-# ✅ Development environment configuration
-[env.development]
-NODE_ENV = "development"
-SERVICE_VERSION = "3.0.0-dev"
-
-[env.development.vars]
-CACHE_TTL_SECONDS = "60"
-RATE_LIMIT_RPM = "10000"
+# Additional development configurations (merged above)
 
 # Development KV namespace
 [[env.development.kv_namespaces]]
