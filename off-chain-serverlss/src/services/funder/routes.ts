@@ -367,9 +367,10 @@ app.post('/permit2', async (c) => {
       }, 400);
     }
 
-    const permit2Data = await funderService.buildPermit2Data(
-      chainId,
+    const permit2Data = await funderService.buildPermit2DataFromParams(
+      chainId as ChainId,
       token,
+      'owner', // TODO: Get actual owner from request
       spender,
       amount,
       deadline

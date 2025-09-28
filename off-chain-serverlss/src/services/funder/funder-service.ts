@@ -6,6 +6,7 @@ import type {
   Token
 } from '../../core/types';
 import { ChainId } from '../../core/types';
+import { ERC20Service } from '../erc20';
 
 /**
  * Funder Service
@@ -19,9 +20,13 @@ import { ChainId } from '../../core/types';
 export class FunderService extends BaseService {
   private fundingConfig: FundingConfig;
   private monitoredAddresses: Set<string> = new Set();
+  private erc20Service: ERC20Service;
 
   constructor(env: Env) {
     super(env);
+    
+    // Initialize ERC20 service
+    this.erc20Service = new ERC20Service(env);
     
     // Default funding configuration
     this.fundingConfig = {
@@ -37,6 +42,9 @@ export class FunderService extends BaseService {
   }
 
   protected async onInitialize(): Promise<void> {
+    // Initialize ERC20 service
+    await this.erc20Service.initialize();
+    
     await this.loadMonitoredAddresses();
     await this.setupFundingConfiguration();
   }
@@ -76,12 +84,10 @@ export class FunderService extends BaseService {
    * Setup funding configuration
    */
   private async setupFundingConfiguration(): Promise<void> {
-    // Load configuration from environment or database
-    if (this.env.MIN_ETH_BALANCE) {
-      this.fundingConfig.minEthBalance = this.env.MIN_ETH_BALANCE;
-    }
+    // Load configuration from environment variables or use defaults
+    // This allows for runtime configuration changes
     
-    this.logger.info('Funding configuration setup', { config: this.fundingConfig });
+    this.logger.info('Funding configuration setup', this.fundingConfig);
   }
 
   /**
@@ -319,7 +325,40 @@ export class FunderService extends BaseService {
   }
 
   /**
+   * Build permit2 data from raw parameters (for legacy API compatibility)
+   */
+  async buildPermit2DataFromParams(
+    chainId: ChainId,
+    tokenAddress: string,
+    owner: string,
+    spender: string,
+    amount: string,
+    deadline?: number
+  ): Promise<any> {
+    try {
+      // Get token info from ERC20Service
+      const token = await this.erc20Service.getTokenInfo(tokenAddress, chainId);
+      if (!token) {
+        throw new Error(`Token not found: ${tokenAddress} on chain ${chainId}`);
+      }
+
+      const actualDeadline = deadline || Math.floor(Date.now() / 1000) + 3600; // 1 hour default
+
+      return await this.buildPermit2Data(token, owner, spender, amount, actualDeadline);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      this.logger.error('Failed to build permit2 data from params', {
+        chainId,
+        tokenAddress,
+        error: errorMessage,
+      });
+      throw error;
+    }
+  }
+
+  /**
    * Build permit2 data for ERC20 tokens
+   * Now uses the shared ERC20Service
    */
   async buildPermit2Data(
     token: Token,
@@ -329,20 +368,17 @@ export class FunderService extends BaseService {
     deadline: number
   ): Promise<any> {
     try {
-      // This would build the permit2 signature data for ERC20 tokens
-      // Permit2 allows gas-less token approvals
-      
-      const permit2Data = {
-        token: token.address,
+      // Use the shared ERC20Service to generate permit2 data
+      const permit2Data = await this.erc20Service.generatePermit2Data(
+        token.address,
         owner,
         spender,
         amount,
         deadline,
-        nonce: Math.floor(Math.random() * 1000000),
-        chainId: token.chainId,
-      };
+        token.chainId
+      );
 
-      this.logger.info('Permit2 data built', {
+      this.logger.info('Permit2 data built via ERC20Service', {
         token: token.symbol,
         owner,
         spender,
