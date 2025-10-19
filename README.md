@@ -127,7 +127,7 @@ npm install && npm run setup:pkp
 
 #### 创建增强版PKP
 ```typescript
-import { JUCrossChainSDK } from '@genius/sdk';
+import { JUCrossChainSDK } from '@ju/sdk';
 
 const sdk = new JUCrossChainSDK({
   apiKey: 'your-api-key',
@@ -342,7 +342,7 @@ Solana区块链程序，现已增强支持EVM桥接和MPC验证:
 #### 📂 增强的程序结构  
 ```
 ju-contracts-solana/
-├── 🦀 programs/genius/src/
+├── 🦀 programs/ju/src/
 │   ├── lib.rs (✅ 主程序入口)
 │   ├── 🔄 instructions/ (增强指令)
 │   │   ├── create_order.rs (✅ 现有)
@@ -599,7 +599,7 @@ anchor build
 
 **Deployment**:
 ```bash
-solana program deploy target/deploy/genius.so --program-id --with-compute-unit-price 500000 --max-sign-attempts 300 --use-rpc
+solana program deploy target/deploy/ju.so --program-id --with-compute-unit-price 500000 --max-sign-attempts 300 --use-rpc
 ```
 
 ## 🎯 Competition Scope

@@ -73,7 +73,7 @@ Due to Lit Network limitations (HTTP call limits, 30s timeouts), rebalancing use
 ## 📁 Project Structure
 
 ```
-genius-actions/
+ju-actions/
 ├── src/
 │   ├── actions/                 # Lit Actions implementations
 │   │   ├── auth/               # Authentication and key management

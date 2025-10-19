@@ -11,7 +11,7 @@ flowchart TD
     end
 
     subgraph "Solana Components"
-        GeniusSvmPool["GeniusSvmPool"]
+        JUSvmPool["JUSvmPool"]
         ConnectionManager["ConnectionManager"]
         OrderManager["OrderManager"]
         AssetManager["AssetManager"]
@@ -27,23 +27,23 @@ flowchart TD
     solverBase -->|"executeSolver()"| SolverFactory
     SolverFactory -->|"creates"| SolanaSolver
     SolverFactory -->|"creates"| EvmSolver
-    SolverFactory -->|"getOrderStatuses()"| GeniusSvmPool
+    SolverFactory -->|"getOrderStatuses()"| JUSvmPool
     SolverFactory -->|"filter valid orders"| SolanaSolver
 
     SolanaSolver -->|"fillOrderBatch()"| SolanaSolver
     SolanaSolver -->|"verifyOrderParams()"| SolanaSolver
     SolanaSolver -->|"fillOrderSvm()"| SolanaSolver
 
-    SolanaSolver -->|"sequential processing"| GeniusSvmPool
+    SolanaSolver -->|"sequential processing"| JUSvmPool
 
-    GeniusSvmPool -->|"creates"| ConnectionManager
-    GeniusSvmPool -->|"creates"| OrderManager
-    GeniusSvmPool -->|"creates"| AssetManager
-    GeniusSvmPool -->|"creates"| TransactionBuilder
+    JUSvmPool -->|"creates"| ConnectionManager
+    JUSvmPool -->|"creates"| OrderManager
+    JUSvmPool -->|"creates"| AssetManager
+    JUSvmPool -->|"creates"| TransactionBuilder
 
-    GeniusSvmPool -->|"getFillOrderTx()"| TransactionBuilder
-    GeniusSvmPool -->|"getTransferUsdcTxn()"| TransactionBuilder
-    GeniusSvmPool -->|"getFillOrderTokenTransferTx()"| TransactionBuilder
+    JUSvmPool -->|"getFillOrderTx()"| TransactionBuilder
+    JUSvmPool -->|"getTransferUsdcTxn()"| TransactionBuilder
+    JUSvmPool -->|"getFillOrderTokenTransferTx()"| TransactionBuilder
 
     SolanaSolver -->|"getSolanaSwapTx()"| SolanaSolver
     SolanaSolver -->|"handleSwapIfNeeded()"| SolanaSolver

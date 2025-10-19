@@ -100,7 +100,7 @@ Due to Lit Network limitations (HTTP call limits, 30s timeouts), rebalancing use
 - `svm-*` - Solana-specific utilities
 
 **Action Management:**
-- `genius-actions.service.ts` - On-chain action implementation management
+- `ju-actions.service.ts` - On-chain action implementation management
 
 **Key Security Areas:**
 - Vault balance verification

@@ -1,4 +1,4 @@
-# Solana Program for Genius Protocol
+# Solana Program for JU Protocol
 
 
 ## Install Dependencies
@@ -22,7 +22,7 @@
 ## How to deploy this program?
 
 First of all, you have to clone this repo to your PC.
-In the folder `genius-contracts-solana`
+In the folder `ju-contracts-solana`
 
 1. Install node modules using `yarn`
 
@@ -30,7 +30,7 @@ In the folder `genius-contracts-solana`
 
 3. Get program address using solana cli.
 
-    `solana-keygen pubkey ./target/deploy/genius-keypair.json`
+    `solana-keygen pubkey ./target/deploy/ju-keypair.json`
    
    You can get the pubkey of the program. e.g. `BE4G...5qhv`
 
@@ -42,7 +42,7 @@ In the folder `genius-contracts-solana`
    ```
    in `Anchor.toml`
    ```
-   genius = "BE4G...5qhv"
+   ju = "BE4G...5qhv"
    ```
 
 5. Change provider settings in `Anchor.toml`
