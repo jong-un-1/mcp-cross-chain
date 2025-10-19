@@ -32,15 +32,23 @@ contract GeniusProxyCall is IGeniusProxyCall, MultiSendCallOnly, AccessControl {
     }
 
     modifier onlyCallerOrSelf() {
-        if (!hasRole(CALLER_ROLE, msg.sender) && msg.sender != address(this))
-            revert GeniusErrors.InvalidCaller();
+        _onlyCallerOrSelf();
         _;
     }
 
     modifier onlyAdmin() {
+        _onlyAdmin();
+        _;
+    }
+
+    function _onlyCallerOrSelf() internal view {
+        if (!hasRole(CALLER_ROLE, msg.sender) && msg.sender != address(this))
+            revert GeniusErrors.InvalidCaller();
+    }
+
+    function _onlyAdmin() internal view {
         if (!hasRole(DEFAULT_ADMIN_ROLE, msg.sender))
             revert GeniusErrors.IsNotAdmin();
-        _;
     }
 
     /**

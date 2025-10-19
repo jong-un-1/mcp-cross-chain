@@ -47,15 +47,23 @@ contract GeniusGasTank is IGeniusGasTank, AccessControl, Pausable {
     }
 
     modifier onlyAdmin() {
-        if (!hasRole(DEFAULT_ADMIN_ROLE, msg.sender))
-            revert GeniusErrors.IsNotAdmin();
+        _onlyAdmin();
         _;
     }
 
     modifier onlyPauser() {
+        _onlyPauser();
+        _;
+    }
+
+    function _onlyAdmin() internal view {
+        if (!hasRole(DEFAULT_ADMIN_ROLE, msg.sender))
+            revert GeniusErrors.IsNotAdmin();
+    }
+
+    function _onlyPauser() internal view {
         if (!hasRole(PAUSER_ROLE, msg.sender))
             revert GeniusErrors.IsNotPauser();
-        _;
     }
 
     /**

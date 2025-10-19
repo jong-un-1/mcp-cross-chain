@@ -56,9 +56,13 @@ contract FeeCollector is
     address public vault;
 
     modifier onlyAdmin() {
+        _onlyAdmin();
+        _;
+    }
+
+    function _onlyAdmin() internal view {
         if (!hasRole(DEFAULT_ADMIN_ROLE, msg.sender))
             revert GeniusErrors.IsNotAdmin();
-        _;
     }
 
     // Constructor disables initialization for implementation contract

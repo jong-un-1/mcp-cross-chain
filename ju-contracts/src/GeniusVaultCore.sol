@@ -73,29 +73,49 @@ abstract contract GeniusVaultCore is
     // ╚═══════════════════════════════════════════════════════════╝
 
     modifier onlyAdmin() {
-        if (!hasRole(DEFAULT_ADMIN_ROLE, msg.sender))
-            revert GeniusErrors.IsNotAdmin();
+        _onlyAdmin();
         _;
     }
 
     modifier onlyPauser() {
-        if (!hasRole(PAUSER_ROLE, msg.sender))
-            revert GeniusErrors.IsNotPauser();
+        _onlyPauser();
         _;
     }
 
     modifier onlyOrchestrator() {
-        if (!hasRole(ORCHESTRATOR_ROLE, msg.sender))
-            revert GeniusErrors.IsNotOrchestrator();
+        _onlyOrchestrator();
         _;
     }
 
     modifier onlyOrchestratorOrAdmin() {
+        _onlyOrchestratorOrAdmin();
+        _;
+    }
+
+    // ╔═══════════════════════════════════════════════════════════╗
+    // ║                  INTERNAL MODIFIER LOGIC                  ║
+    // ╚═══════════════════════════════════════════════════════════╝
+
+    function _onlyAdmin() internal view {
+        if (!hasRole(DEFAULT_ADMIN_ROLE, msg.sender))
+            revert GeniusErrors.IsNotAdmin();
+    }
+
+    function _onlyPauser() internal view {
+        if (!hasRole(PAUSER_ROLE, msg.sender))
+            revert GeniusErrors.IsNotPauser();
+    }
+
+    function _onlyOrchestrator() internal view {
+        if (!hasRole(ORCHESTRATOR_ROLE, msg.sender))
+            revert GeniusErrors.IsNotOrchestrator();
+    }
+
+    function _onlyOrchestratorOrAdmin() internal view {
         if (
             !hasRole(ORCHESTRATOR_ROLE, msg.sender) &&
             !hasRole(DEFAULT_ADMIN_ROLE, msg.sender)
         ) revert GeniusErrors.IsNotOrchestratorNorAdmin();
-        _;
     }
 
     // ╔═══════════════════════════════════════════════════════════╗
