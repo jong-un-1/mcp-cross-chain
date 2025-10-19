@@ -5,26 +5,26 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-genius = "5Yxrh62n36maX6u8nePs2ztWfKTWA9pJLXCNd1tzo1kP"
+ju = "5Yxrh62n36maX6u8nePs2ztWfKTWA9pJLXCNd1tzo1kP"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
 cluster = "localnet"
-wallet = "~/.config/solana/genius-admin.json"
+wallet = "~/.config/solana/ju-admin.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
 
-[[test.genesis]]
+[[test.ju]]
 address = "4sN8PnN2ki2W4TFXAfzR645FWs8nimmsYeNtxM8RBK6A"
 program = "./artifacts/spl_token_faucet.so"
 
-[[test.genesis]]
+[[test.ju]]
 address = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
 program = "./artifacts/metadata_program.so"
 
-[[test.genesis]]
+[[test.ju]]
 address = "556qRmYYuXwFVXYVztx3HvMzePDBchuXMDLBWVzzaG4M"
-program = "./target/deploy/genius.so"
+program = "./target/deploy/ju.so"

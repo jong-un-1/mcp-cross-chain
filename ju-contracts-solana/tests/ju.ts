@@ -6,7 +6,7 @@ import {
   EventParser,
   web3,
 } from "@coral-xyz/anchor";
-import { Genius } from "../target/types/genius";
+import { Ju } from "../target/types/ju";
 import {
   createMint,
   getOrCreateAssociatedTokenAccount,
@@ -16,11 +16,11 @@ import { ComputeBudgetProgram, Keypair } from "@solana/web3.js";
 import { assert } from "chai";
 import bs58 from "bs58";
 
-describe("genius", async () => {
+describe("ju", async () => {
   // Configure the client to use the local cluster.
   anchor.setProvider(anchor.AnchorProvider.env());
 
-  const program = anchor.workspace.Genius as Program<Genius>;
+  const program = anchor.workspace.Ju as Program<Ju>;
 
   const LAMPORTS_PER_SOL = 1_000_000_000;
 

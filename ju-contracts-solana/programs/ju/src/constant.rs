@@ -1,5 +1,5 @@
 use crate::*;
-use solana_program::{pubkey, pubkey::Pubkey};
+use anchor_lang::solana_program::{pubkey, pubkey::Pubkey};
 
 //  seeds
 pub const GLOBAL_SEED: &[u8] = b"genius-global-state-seed";

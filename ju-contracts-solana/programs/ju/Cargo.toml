@@ -1,12 +1,12 @@
 [package]
-name = "genius"
+name = "ju"
 version = "0.1.0"
 description = "Created with Anchor"
 edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "lib"]
-name = "genius"
+name = "ju"
 
 [features]
 no-entrypoint = []
@@ -22,7 +22,6 @@ anchor-lang = { version = "0.32.1", features = ["init-if-needed"] }
 anchor-spl = "0.32.1"
 pyth-solana-receiver-sdk = "1.0.1"
 pythnet-sdk = "=2.3.1"
-solana-program = "3.0.0"
 
 [profile.release]
 overflow-checks = true

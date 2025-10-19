@@ -1,6 +1,9 @@
 use crate::*;
 use anchor_spl::token::{self, TokenAccount};
-use solana_program::program::{invoke, invoke_signed};
+use anchor_lang::solana_program::{
+    program::{invoke, invoke_signed},
+    system_instruction,
+};
 
 // transfer sol from PDA
 pub fn sol_transfer_with_signer<'a>(
@@ -10,7 +13,7 @@ pub fn sol_transfer_with_signer<'a>(
     signers: &[&[&[u8]]; 1],
     amount: u64,
 ) -> Result<()> {
-    let ix = solana_program::system_instruction::transfer(source.key, destination.key, amount);
+    let ix = system_instruction::transfer(source.key, destination.key, amount);
     invoke_signed(&ix, &[source, destination, system_program], signers)?;
     Ok(())
 }
@@ -22,7 +25,7 @@ pub fn sol_transfer_user<'a>(
     system_program: AccountInfo<'a>,
     amount: u64,
 ) -> Result<()> {
-    let ix = solana_program::system_instruction::transfer(source.key, destination.key, amount);
+    let ix = system_instruction::transfer(source.key, destination.key, amount);
     invoke(&ix, &[source, destination, system_program])?;
     Ok(())
 }

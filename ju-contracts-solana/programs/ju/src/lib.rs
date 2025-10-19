@@ -14,7 +14,7 @@ use util::*;
 declare_id!("5Yxrh62n36maX6u8nePs2ztWfKTWA9pJLXCNd1tzo1kP");
 
 #[program]
-pub mod genius {
+pub mod ju {
     use super::*;
 
     //  called by contract deployer only 1 time to initialize global values
