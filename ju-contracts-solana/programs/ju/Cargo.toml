@@ -19,7 +19,8 @@ test-bpf = []
 
 
 [dependencies]
-anchor-lang = { version = "0.32.1", features = ["init-if-needed"] }
-anchor-spl = "0.32.1"
-pyth-solana-receiver-sdk = "1.0.1"
-base64ct = "=1.6.0"
+anchor-lang = { version = "0.30.1", features = ["init-if-needed"] }
+anchor-spl = "0.30.1"
+pyth-solana-receiver-sdk = "0.6.1"
+pythnet-sdk = "=2.3.1"
+solana-program = "1.17.3"
