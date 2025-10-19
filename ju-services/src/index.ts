@@ -63,7 +63,7 @@ app.use('*', async (c, next) => {
   
   c.set('requestId', requestId);
   c.res.headers.set('X-Request-ID', requestId);
-  c.res.headers.set('X-Powered-By', 'Genius Cross-Chain Microservices');
+  c.res.headers.set('X-Powered-By', 'JU Cross-Chain Microservices');
   
   await next();
   
@@ -76,7 +76,7 @@ app.use('*', async (c, next) => {
  */
 app.get('/', (c) => {
   return c.json({
-    name: 'Genius Cross-Chain Microservices',
+    name: 'JU Cross-Chain Microservices',
     version: '1.0.0',
     status: 'healthy',
     timestamp: new Date().toISOString(),
@@ -139,7 +139,7 @@ app.get('/health', async (c) => {
  */
 app.get('/docs', (c) => {
   return c.json({
-    title: 'Genius Cross-Chain Microservices API',
+    title: 'JU Cross-Chain Microservices API',
     version: '1.0.0',
     description: 'RESTful API for cross-chain DEX operations',
     baseUrl: c.req.url.replace(/\/docs$/, ''),
@@ -240,7 +240,7 @@ app.get('/status', async (c) => {
   const timestamp = new Date().toISOString();
   
   return c.json({
-    system: 'Genius Cross-Chain DEX',
+    system: 'JU Cross-Chain DEX',
     status: 'operational',
     timestamp,
     version: '1.0.0',

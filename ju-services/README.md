@@ -36,7 +36,7 @@ A high-performance, scalable cross-chain DEX backend built on **Cloudflare Worke
 ```bash
 # Clone and install dependencies
 git clone <repository>
-cd off-chain-serverlss
+cd ju-services
 npm install
 
 # Install Wrangler CLI globally

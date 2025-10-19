@@ -20,7 +20,7 @@ Complete setup guide for deploying the Cross-Chain DEX microservices architectur
 ```bash
 # Clone the repository
 git clone <your-repo-url>
-cd off-chain-serverlss
+cd ju-services
 
 # Install dependencies
 npm install

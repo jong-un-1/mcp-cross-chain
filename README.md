@@ -115,7 +115,7 @@ cd ../ju-contracts-solana
 anchor build && anchor deploy
 
 # 启动自动化服务
-cd ../off-chain-serverlss
+cd ../ju-services
 npm install && npm run deploy:microservices
 
 # 配置Lit Actions
@@ -369,14 +369,14 @@ ju-contracts-solana/
 - **⚡ 自动化指令** - 条件触发的程序执行  
 - **📊 状态同步** - 跨链状态一致性管理
 
-### 🚀 Off-Chain Serverless (`off-chain-serverlss/`)
+### 🚀 JU Services (`ju-services/`)
 **总代码行数**: 1,500+ (大幅增强中)
 
 微服务架构，现已升级为智能自动化监控系统:
 
 #### 📂 增强的服务结构
 ```
-off-chain-serverlss/
+ju-services/
 ├── 🌐 src/
 │   ├── 🔄 services/ (增强服务)
 │   │   ├── keeper/ 

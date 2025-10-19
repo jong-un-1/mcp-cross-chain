@@ -3,13 +3,13 @@
 
 ## 概述
 
-设计一个智能条件执行引擎，支持链上事件监听和自动触发跨链合约调用。基于现有的 `off-chain-serverlss/src/services/keeper/keeper-service.ts` 架构，扩展支持复杂的条件逻辑和自动化执行。
+设计一个智能条件执行引擎，支持链上事件监听和自动触发跨链合约调用。基于现有的 `ju-services/src/services/keeper/keeper-service.ts` 架构，扩展支持复杂的条件逻辑和自动化执行。
 
 ## 现有基础分析
 
 ### 当前Keeper服务能力
 ```typescript
-// 现有文件: off-chain-serverlss/src/services/keeper/keeper-service.ts
+// 现有文件: ju-services/src/services/keeper/keeper-service.ts
 // 支持功能:
 // - 定时任务调度
 // - 基础订单监控

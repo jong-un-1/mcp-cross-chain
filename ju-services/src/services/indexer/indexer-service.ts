@@ -59,8 +59,8 @@ export class IndexerService extends BaseService {
   private initializeContractAddresses(): void {
     // DEX Router and Vault contract addresses for each chain
     this.contractAddresses.set(ChainId.ETHEREUM, [
-      '0x1234567890123456789012345678901234567890', // GeniusRouter
-      '0x2345678901234567890123456789012345678901', // GeniusVault
+      '0x1234567890123456789012345678901234567890', // JURouter
+      '0x2345678901234567890123456789012345678901', // JUVault
     ]);
 
     this.contractAddresses.set(ChainId.BSC, [

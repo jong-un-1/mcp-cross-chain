@@ -84,7 +84,7 @@
 
 #### 任务详情
 ```
-现有基础: off-chain-serverlss/src/services/keeper/keeper-service.ts
+现有基础: ju-services/src/services/keeper/keeper-service.ts
 目标: 支持多链事件监听和自动化触发
 ```
 

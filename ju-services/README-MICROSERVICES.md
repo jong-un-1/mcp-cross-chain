@@ -73,7 +73,7 @@ Based on the system architecture diagram, this backend consists of 5 core micros
 ## 📁 Project Structure
 
 ```
-off-chain-serverlss/
+ju-services/
 ├── src/
 │   ├── core/                    # Shared core functionality
 │   │   ├── types.ts            # TypeScript type definitions
