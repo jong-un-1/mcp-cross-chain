@@ -1,0 +1,15 @@
+[submodule "ju-contracts/lib/openzeppelin-contracts"]
+	path = ju-contracts/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "ju-contracts/lib/openzeppelin-contracts-upgradeable"]
+	path = ju-contracts/lib/openzeppelin-contracts-upgradeable
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable
+[submodule "ju-contracts/lib/permit2"]
+	path = ju-contracts/lib/permit2
+	url = https://github.com/Uniswap/permit2
+[submodule "ju-contracts/lib/solmate"]
+	path = ju-contracts/lib/solmate
+	url = https://github.com/transmissions11/solmate
+[submodule "ju-contracts/lib/aave-v3-core"]
+	path = ju-contracts/lib/aave-v3-core
+	url = https://github.com/aave/aave-v3-core
