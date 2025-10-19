@@ -51,6 +51,10 @@ contract GeniusVaultFeeTiers is Test {
         // Set a deterministic chainId for testing
         uint256 testChainId = 43114; // Avalanche chain ID
         vm.chainId(testChainId);
+        // Casting to uint16 is safe - testChainId is a valid chain ID
+        // forge-lint: disable-next-line(unsafe-typecast)
+        // Casting to uint16 is safe - testChainId is a valid chain ID
+        // forge-lint: disable-next-line(unsafe-typecast)
         sourceChainId = uint16(testChainId);
 
         console.log("Chain ID set to:", block.chainid);

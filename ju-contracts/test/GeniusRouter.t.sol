@@ -333,6 +333,10 @@ contract GeniusRouterTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(DAI),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_DAI_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -419,6 +423,10 @@ contract GeniusRouterTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(DAI),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_DAI_BALANCE),
                 nonce: 0,
                 expiration: 1900000000

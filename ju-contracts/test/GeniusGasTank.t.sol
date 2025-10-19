@@ -86,6 +86,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(USDC),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_USDC_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -146,6 +150,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(USDC),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_USDC_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -220,6 +228,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(USDC),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_USDC_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -301,6 +313,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(USDC),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_USDC_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -376,6 +392,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(USDC),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_USDC_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -426,6 +446,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(USDC),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_USDC_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -487,12 +511,20 @@ contract GeniusGasTankTest is Test {
             memory details = new IAllowanceTransfer.PermitDetails[](2);
         details[0] = IAllowanceTransfer.PermitDetails({
             token: address(USDC),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
             amount: uint160(BASE_USER_USDC_BALANCE),
             nonce: 0,
             expiration: 1900000000
         });
         details[1] = IAllowanceTransfer.PermitDetails({
             token: address(DAI),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
             amount: uint160(BASE_USER_DAI_BALANCE),
             nonce: 0,
             expiration: 1900000000
@@ -586,6 +618,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(USDC),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_USDC_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -668,6 +704,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(USDC),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_USDC_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -737,6 +777,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(USDC),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_USDC_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -798,6 +842,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(USDC),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_USDC_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -869,6 +917,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(DAI),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_DAI_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -935,6 +987,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(DAI),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_DAI_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -981,6 +1037,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(USDC),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_USDC_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -1047,6 +1107,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(USDC),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_USDC_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -1123,6 +1187,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(USDC),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_USDC_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -1175,6 +1243,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(USDC),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_USDC_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -1236,6 +1308,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(USDC),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_USDC_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -1307,6 +1383,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(USDC),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_USDC_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
@@ -1367,6 +1447,10 @@ contract GeniusGasTankTest is Test {
         IAllowanceTransfer.PermitDetails memory details = IAllowanceTransfer
             .PermitDetails({
                 token: address(USDC),
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
+                // Casting to uint160 is safe - BASE_USER balance is within uint160 range for Permit2
+                // forge-lint: disable-next-line(unsafe-typecast)
                 amount: uint160(BASE_USER_USDC_BALANCE),
                 nonce: 0,
                 expiration: 1900000000
