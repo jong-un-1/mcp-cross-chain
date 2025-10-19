@@ -6,7 +6,9 @@ gas_reports = ["*"]
 cbor_metadata = true
 optimizer = true
 optimizer_runs = 200
-etherscan_api_version = "v2"
+remappings = [
+    "src/=src/"
+]
 
 
 [rpc_endpoints]

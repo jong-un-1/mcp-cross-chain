@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 import {ITransparentUpgradeableProxy} from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
-import {GeniusVault} from "../../src/GeniusVault.sol";
+import {GeniusVault} from "../src/GeniusVault.sol";
 import {BaseScriptContext} from "./utils/BaseScriptContext.sol";
 import {console} from "forge-std/Script.sol";
 
