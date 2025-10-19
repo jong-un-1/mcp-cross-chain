@@ -50,7 +50,7 @@ pub fn unwrap_and_transfer_sol<'a>(
 
     // Then transfer the SOL to receiver
     let transfer_ix =
-        solana_program::system_instruction::transfer(&authority.key(), &receiver.key(), amount);
+        system_instruction::transfer(&authority.key(), &receiver.key(), amount);
 
     // Execute the transfer
     invoke(&transfer_ix, &[authority, receiver, system_program])?;
