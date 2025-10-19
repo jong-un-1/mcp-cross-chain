@@ -5,27 +5,27 @@ import {DeployGeniusEcosystemCore} from "./DeployGeniusEcosystemCore.s.sol";
 
 // COMMAND: forge script script/deployment/DeployArbitrumGeniusEcosystem.s.sol --rpc-url $ARBITRUM_RPC_URL --broadcast --via-ir
 contract DeployArbitrumGeniusEcosystem is DeployGeniusEcosystemCore {
-    address public constant stableAddress =
+    address public constant STABLE_ADDRESS =
         0xaf88d065e77c8cC2239327C5EDb3A432268e5831;
-    address public constant priceFeed =
+    address public constant PRICE_FEED =
         0x50834F3163758fcC1Df9973b6e91f0F0F0434aD3;
-    uint256 public constant priceFeedHeartBeat = 86400;
+    uint256 public constant PRICE_FEED_HEART_BEAT = 86400;
 
-    address public constant permit2Address =
+    address public constant PERMIT2_ADDRESS =
         0x000000000022D473030F116dDEE9F6B43aC78BA3;
-    address public constant owner = 0x5CC11Ef1DE86c5E00259a463Ac3F3AE1A0fA2909;
+    address public constant OWNER = 0x5CC11Ef1DE86c5E00259a463Ac3F3AE1A0fA2909;
 
     function run() external {
         address[] memory orchestrators = new address[](0);
 
         address[] memory feeTokens = new address[](7);
-        feeTokens[0] = stableAddress; // USDC
-        feeTokens[1] = stableAddress; // USDC
-        feeTokens[2] = stableAddress; // USDC
-        feeTokens[3] = stableAddress; // USDC
-        feeTokens[4] = stableAddress; // USDC
-        feeTokens[5] = stableAddress; // USDC
-        feeTokens[6] = stableAddress; // USDC
+        feeTokens[0] = STABLE_ADDRESS; // USDC
+        feeTokens[1] = STABLE_ADDRESS; // USDC
+        feeTokens[2] = STABLE_ADDRESS; // USDC
+        feeTokens[3] = STABLE_ADDRESS; // USDC
+        feeTokens[4] = STABLE_ADDRESS; // USDC
+        feeTokens[5] = STABLE_ADDRESS; // USDC
+        feeTokens[6] = STABLE_ADDRESS; // USDC
 
         uint256[] memory minFeeAmounts = new uint256[](7);
         minFeeAmounts[0] = 100000; // $0.1
@@ -48,11 +48,11 @@ contract DeployArbitrumGeniusEcosystem is DeployGeniusEcosystemCore {
         targetNetworks[6] = 137; //POLYGON
 
         _run(
-            permit2Address,
-            stableAddress,
-            priceFeed,
-            priceFeedHeartBeat,
-            owner,
+            PERMIT2_ADDRESS,
+            STABLE_ADDRESS,
+            PRICE_FEED,
+            PRICE_FEED_HEART_BEAT,
+            OWNER,
             orchestrators,
             targetNetworks,
             feeTokens,

@@ -25,7 +25,7 @@ contract GeniusSponsoredOrdersTest is Test {
     uint256 constant BASE_USER_WETH_BALANCE = 100 ether;
     uint256 constant BASE_USER_DAI_BALANCE = 100 ether;
     uint256 constant BASE_ROUTER_USDC_BALANCE = 100 ether;
-    uint256 constant destChainId = 1;
+    uint256 constant DEST_CHAIN_ID = 1;
 
     bytes32 public DOMAIN_SEPERATOR;
 
@@ -151,10 +151,10 @@ contract GeniusSponsoredOrdersTest is Test {
         FEE_COLLECTOR.setInsuranceFeeTiers(insThresholdAmounts, insBpsFees);
 
         // Set min fee in FeeCollector
-        FEE_COLLECTOR.setTargetChainMinFee(destChainId, 1 ether);
+        FEE_COLLECTOR.setTargetChainMinFee(DEST_CHAIN_ID, 1 ether);
 
         // Set decimals in Vault
-        GENIUS_VAULT.setChainStablecoinDecimals(destChainId, 6);
+        GENIUS_VAULT.setChainStablecoinDecimals(DEST_CHAIN_ID, 6);
         GENIUS_ROUTER = new GeniusRouter(
             address(PERMIT2),
             address(GENIUS_VAULT),
@@ -178,7 +178,7 @@ contract GeniusSponsoredOrdersTest is Test {
         PROXYCALL.grantRole(PROXYCALL.CALLER_ROLE(), address(GENIUS_ROUTER));
         PROXYCALL.grantRole(PROXYCALL.CALLER_ROLE(), address(GENIUS_VAULT));
         PROXYCALL.grantRole(PROXYCALL.CALLER_ROLE(), address(GAS_TANK));
-        GENIUS_VAULT.setChainStablecoinDecimals(destChainId, 6);
+        GENIUS_VAULT.setChainStablecoinDecimals(DEST_CHAIN_ID, 6);
 
         vm.stopPrank();
 
@@ -210,7 +210,7 @@ contract GeniusSponsoredOrdersTest is Test {
         );
 
         uint256 bridgeFee = FEE_COLLECTOR
-            .getOrderFees(BASE_ROUTER_USDC_BALANCE / 2, destChainId)
+            .getOrderFees(BASE_ROUTER_USDC_BALANCE / 2, DEST_CHAIN_ID)
             .totalFee;
         uint256 minAmountOut = 49 ether;
 
@@ -223,7 +223,7 @@ contract GeniusSponsoredOrdersTest is Test {
             address(DEX_ROUTER),
             data,
             USER,
-            destChainId,
+            DEST_CHAIN_ID,
             0, // feeSurplus
             RECEIVER,
             minAmountOut,
@@ -271,7 +271,7 @@ contract GeniusSponsoredOrdersTest is Test {
             tokenOut: TOKEN_OUT,
             amountIn: BASE_ROUTER_USDC_BALANCE / 2,
             minAmountOut: minAmountOut,
-            destChainId: destChainId,
+            destChainId: DEST_CHAIN_ID,
             srcChainId: block.chainid,
             fee: bridgeFee
         });
@@ -280,7 +280,7 @@ contract GeniusSponsoredOrdersTest is Test {
 
         vm.expectEmit(address(GENIUS_VAULT));
         emit IGeniusVault.OrderCreated(
-            destChainId,
+            DEST_CHAIN_ID,
             RECEIVER,
             RECEIVER,
             bytes32(uint256(1)),
@@ -318,7 +318,7 @@ contract GeniusSponsoredOrdersTest is Test {
 
         IFeeCollector.FeeBreakdown memory fees = FEE_COLLECTOR.getOrderFees(
             BASE_ROUTER_USDC_BALANCE / 2,
-            destChainId
+            DEST_CHAIN_ID
         );
 
         assertEq(

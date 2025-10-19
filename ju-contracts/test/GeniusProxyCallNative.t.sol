@@ -350,6 +350,8 @@ contract GeniusProxyCallNativeTokenTest is Test {
 
         // Do a simple USDC transfer (no swap, no call)
         vm.startPrank(CALLER);
+        // Low-level call success is checked in assertion below
+        // forge-lint: disable-next-line(unchecked-call)
         (, , bool success) = PROXYCALL.call(
             USER,
             address(0),

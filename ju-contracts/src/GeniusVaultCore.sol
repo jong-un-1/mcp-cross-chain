@@ -302,6 +302,30 @@ abstract contract GeniusVaultCore is
         bytes memory callData
     ) internal whenNotPaused {
         bytes32 orderHash_ = orderHash(order);
+        _validateOrder(order, orderHash_, callTarget, callData);
+        
+        uint256 formattedStablecoinAmountOut = _calculateFormattedAmount(order);
+        _isAmountValid(formattedStablecoinAmountOut, availableAssets());
+        
+        orderStatus[orderHash_] = OrderStatus.Filled;
+        
+        _executeOrderTransfer(
+            order,
+            orderHash_,
+            swapTarget,
+            swapData,
+            callTarget,
+            callData,
+            formattedStablecoinAmountOut
+        );
+    }
+
+    function _validateOrder(
+        Order memory order,
+        bytes32 orderHash_,
+        address callTarget,
+        bytes memory callData
+    ) internal view {
         if (orderStatus[orderHash_] != OrderStatus.Nonexistant)
             revert GeniusErrors.OrderAlreadyFilled(orderHash_);
         if (order.destChainId != _currentChainId())
@@ -311,52 +335,66 @@ abstract contract GeniusVaultCore is
         if (order.trader == bytes32(0) || order.receiver == bytes32(0))
             revert GeniusErrors.InvalidTrader();
 
-        uint256 sourceChainDecimals = chainStablecoinDecimals[order.srcChainId];
-        if (sourceChainDecimals == 0)
-            revert GeniusErrors.InvalidSourceChainId(order.srcChainId);
-
-        uint256 formattedStablecoinAmountOut = _convertDecimals(
-            order.amountIn - order.fee,
-            uint8(sourceChainDecimals),
-            decimals()
-        );
-
-        _isAmountValid(formattedStablecoinAmountOut, availableAssets());
-
-        bool isSwap = swapTarget != address(0);
-        bool isCall = callTarget != address(0);
-
-        if (isCall) {
+        if (callTarget != address(0)) {
             bytes32 reconstructedSeed = calldataToSeed(callTarget, callData);
             if (bytes16(reconstructedSeed) != bytes16(order.seed))
                 revert GeniusErrors.InvalidSeed();
         }
+    }
 
-        orderStatus[orderHash_] = OrderStatus.Filled;
+    function _calculateFormattedAmount(Order memory order) internal view returns (uint256) {
+        uint256 sourceChainDecimals = chainStablecoinDecimals[order.srcChainId];
+        if (sourceChainDecimals == 0)
+            revert GeniusErrors.InvalidSourceChainId(order.srcChainId);
+
+        return _convertDecimals(
+            order.amountIn - order.fee,
+            uint8(sourceChainDecimals),
+            decimals()
+        );
+    }
+
+    function _executeOrderTransfer(
+        Order memory order,
+        bytes32 orderHash_,
+        address swapTarget,
+        bytes memory swapData,
+        address callTarget,
+        bytes memory callData,
+        uint256 formattedStablecoinAmountOut
+    ) internal {
         address receiver = bytes32ToAddress(order.receiver);
-        address effectiveTokenOut = address(STABLECOIN);
-        uint256 effectiveAmountOut = formattedStablecoinAmountOut;
-        bool success = true;
-
-        if (!isCall && !isSwap) {
+        
+        if (callTarget == address(0) && swapTarget == address(0)) {
+            // Simple transfer - no swap or call
             STABLECOIN.safeTransfer(receiver, formattedStablecoinAmountOut);
-        } else {
-            IERC20 tokenOut = IERC20(bytes32ToAddress(order.tokenOut));
-            STABLECOIN.safeTransfer(
-                address(PROXYCALL),
-                formattedStablecoinAmountOut
-            );
-            (effectiveTokenOut, effectiveAmountOut, success) = PROXYCALL.call(
-                receiver,
-                swapTarget,
-                callTarget,
+            emit OrderFilled(
+                order.srcChainId,
+                order.trader,
+                order.receiver,
+                order.seed,
+                orderHash_,
                 address(STABLECOIN),
-                address(tokenOut),
-                order.minAmountOut,
-                swapData,
-                callData
+                formattedStablecoinAmountOut,
+                formattedStablecoinAmountOut,
+                true
             );
+            return;
         }
+
+        // Swap/Call case
+        STABLECOIN.safeTransfer(address(PROXYCALL), formattedStablecoinAmountOut);
+        
+        address tokenOut = bytes32ToAddress(order.tokenOut);
+        (address effectiveTokenOut, uint256 effectiveAmountOut, bool success) = _executeProxyCall(
+            receiver,
+            swapTarget,
+            swapData,
+            callTarget,
+            callData,
+            tokenOut,
+            order.minAmountOut
+        );
 
         emit OrderFilled(
             order.srcChainId,
@@ -368,6 +406,27 @@ abstract contract GeniusVaultCore is
             effectiveAmountOut,
             formattedStablecoinAmountOut,
             success
+        );
+    }
+
+    function _executeProxyCall(
+        address receiver,
+        address swapTarget,
+        bytes memory swapData,
+        address callTarget,
+        bytes memory callData,
+        address tokenOut,
+        uint256 minAmountOut
+    ) internal returns (address, uint256, bool) {
+        return PROXYCALL.call(
+            receiver,
+            swapTarget,
+            callTarget,
+            address(STABLECOIN),
+            tokenOut,
+            minAmountOut,
+            swapData,
+            callData
         );
     }
 
@@ -562,6 +621,8 @@ abstract contract GeniusVaultCore is
     function _revertOrderDigest(
         bytes32 _orderHash
     ) internal pure returns (bytes32) {
+        // Using keccak256 for order hash cancellation prefix
+        // forge-lint: disable-next-line(asm-keccak256)
         return
             keccak256(abi.encodePacked("PREFIX_CANCEL_ORDER_HASH", _orderHash));
     }

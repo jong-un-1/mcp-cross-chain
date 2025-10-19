@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import {ERC1967Proxy} from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 import {GeniusRouter} from "../src/GeniusRouter.sol";
 import {GeniusProxyCall} from "../src/GeniusProxyCall.sol";
 import {BaseScriptContext} from "./utils/BaseScriptContext.sol";
