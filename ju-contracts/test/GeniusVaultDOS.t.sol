@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.4;
 
-import {Test, console} from "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {ERC1967Proxy} from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 
@@ -10,7 +10,6 @@ import {MockERC20} from "./mocks/MockERC20.sol";
 
 import {GeniusVault} from "../src/GeniusVault.sol";
 import {GeniusProxyCall} from "../src/GeniusProxyCall.sol";
-import {GeniusErrors} from "../src/libs/GeniusErrors.sol";
 import {MockV3Aggregator} from "./mocks/MockV3Aggregator.sol";
 
 contract GeniusVaultDOSTest is Test {
@@ -18,7 +17,7 @@ contract GeniusVaultDOSTest is Test {
     MockV3Aggregator public MOCK_PRICE_FEED;
 
     uint256 avalanche;
-    uint16 constant targetChainId = 42;
+    uint16 constant TARGET_CHAIN_ID = 42;
     string private rpc = vm.envString("AVALANCHE_RPC_URL");
 
     address OWNER;
@@ -127,7 +126,7 @@ contract GeniusVaultDOSTest is Test {
         // This should not revert
         VAULT.rebalanceLiquidity(
             amountToRemove,
-            targetChainId,
+            TARGET_CHAIN_ID,
             address(USDC),
             transferData
         );

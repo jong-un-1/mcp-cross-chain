@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.4;
 
-import {Test, console} from "forge-std/Test.sol";
-import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import {Test} from "forge-std/Test.sol";
 import {GeniusVault} from "../src/GeniusVault.sol";
 import {FeeCollector} from "../src/fees/FeeCollector.sol";
 import {GeniusErrors} from "../src/libs/GeniusErrors.sol";

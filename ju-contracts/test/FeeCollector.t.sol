@@ -1,20 +1,15 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.4;
 
-import {Test, console} from "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 
-import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {ERC1967Proxy} from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 
 import {FeeCollector} from "../src/fees/FeeCollector.sol";
 import {GeniusVault} from "../src/GeniusVault.sol";
 import {IFeeCollector} from "../src/interfaces/IFeeCollector.sol";
-import {GeniusErrors} from "../src/libs/GeniusErrors.sol";
 
 import {MockERC20} from "./mocks/MockERC20.sol";
-import {MockV3Aggregator} from "./mocks/MockV3Aggregator.sol";
-import {GeniusProxyCall} from "../src/GeniusProxyCall.sol";
 
 contract FeeCollectorTest is Test {
     // Test roles

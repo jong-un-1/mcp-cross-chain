@@ -17,7 +17,7 @@ contract GeniusVaultTransferVerificationTest is Test {
     MockV3Aggregator public MOCK_PRICE_FEED;
 
     uint256 avalanche;
-    uint16 constant targetChainId = 42;
+    uint16 constant TARGET_CHAIN_ID = 42;
     string private rpc = vm.envString("AVALANCHE_RPC_URL");
 
     address OWNER;
@@ -123,7 +123,7 @@ contract GeniusVaultTransferVerificationTest is Test {
         vm.expectRevert();
         VAULT.rebalanceLiquidity(
             amountToRemove,
-            targetChainId,
+            TARGET_CHAIN_ID,
             address(USDC),
             transferData
         );
