@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.20;
+pragma solidity 0.8.24;
 
-import {Test, console} from "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {IAllowanceTransfer, IEIP712} from "permit2/interfaces/IAllowanceTransfer.sol";
 import {PermitSignature} from "./utils/SigUtils.sol";
@@ -10,7 +10,6 @@ import {ERC1967Proxy} from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.s
 import {GeniusVault} from "../src/GeniusVault.sol";
 import {GeniusProxyCall} from "../src/GeniusProxyCall.sol";
 import {FeeCollector} from "../src/fees/FeeCollector.sol";
-import {IFeeCollector} from "../src/interfaces/IFeeCollector.sol";
 
 import {MockDEXRouter} from "./mocks/MockDEXRouter.sol";
 import {MockV3Aggregator} from "./mocks/MockV3Aggregator.sol";
@@ -102,6 +101,8 @@ contract GeniusVaultAccounting is Test {
         uint256 expectedAvailable,
         uint256 expectedMin
     ) internal {
+        // Transfer is safe in test context - we control the USDC mock contract
+        // forge-lint: disable-next-line(erc20-unchecked-transfer)
         USDC.transfer(address(VAULT), 10 ether);
         assertEq(
             VAULT.totalStakedAssets(),

@@ -17,16 +17,22 @@ contract MockSwapTarget {
        if (msg.value > 0) {
             console.log("Received ETH: ", msg.value);
 
+            // Transfer is safe in mock contract - used for testing only
+            // forge-lint: disable-next-line(erc20-unchecked-transfer)
             IERC20(tokenOut).transfer(poolAddress, amountOut);
             return (true, amountOut);
         } else {
             // Transfer tokenIn from poolAddress to this contract
             console.log("Transfering tokenIn from poolAddress to this contract");
+            // Transfer is safe in mock contract - used for testing only
+            // forge-lint: disable-next-line(erc20-unchecked-transfer)
             IERC20(tokenIn).transferFrom(poolAddress, address(this), amountIn);
             console.log("SUCCESS: Transfered tokenIn from poolAddress to this contract");
 
             // Transfer tokenOut from this contract to recipient
             console.log("Transfering tokenOut from this contract to poolAddress");
+            // Transfer is safe in mock contract - used for testing only
+            // forge-lint: disable-next-line(erc20-unchecked-transfer)
             IERC20(tokenOut).transfer(poolAddress, amountOut);
             console.log("SUCCESS: Transfered tokenOut from this contract to poolAddress");
             return (true, amountOut);

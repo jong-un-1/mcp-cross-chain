@@ -9,7 +9,6 @@ import {MockERC20} from "./mocks/MockERC20.sol";
 
 import {GeniusVault} from "../src/GeniusVault.sol";
 import {GeniusProxyCall} from "../src/GeniusProxyCall.sol";
-import {GeniusErrors} from "../src/libs/GeniusErrors.sol";
 import {ERC1967Proxy} from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 import {MockV3Aggregator} from "./mocks/MockV3Aggregator.sol";
 
@@ -106,6 +105,8 @@ contract GeniusVaultTransferVerificationTest is Test {
     function testWrongTranferAmountOnRemoveBridgeLiquidity() public {
         // Add initial liquidity
         vm.startPrank(ORCHESTRATOR);
+        // Transfer is safe in test context - we control the USDC mock contract
+        // forge-lint: disable-next-line(erc20-unchecked-transfer)
         USDC.transfer(address(VAULT), 500 ether);
         vm.stopPrank();
 

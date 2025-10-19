@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.4;
 
-import {Test, console} from "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 import {GeniusMulticall} from "src/GeniusMulticall.sol";
 import {TransferEth} from "test/utils/TransferEth.sol";
 

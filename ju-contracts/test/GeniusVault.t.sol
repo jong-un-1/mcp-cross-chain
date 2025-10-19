@@ -3,7 +3,6 @@ pragma solidity ^0.8.4;
 
 import {Test} from "forge-std/Test.sol";
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import {IAllowanceTransfer} from "permit2/interfaces/IAllowanceTransfer.sol";
 import {ERC1967Proxy} from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 import {Pausable} from "@openzeppelin/contracts/utils/Pausable.sol";
 
@@ -245,6 +244,8 @@ contract GeniusVaultTest is Test {
 
     function testcreateOrderWhenNoBalance() public {
         vm.startPrank(address(TRADER));
+        // Transfer is safe in test context - we control the USDC mock contract
+        // forge-lint: disable-next-line(erc20-unchecked-transfer)
         USDC.transfer(address(ORCHESTRATOR), 1 ether);
         USDC.approve(address(VAULT), 1_000 ether);
 
@@ -519,6 +520,8 @@ contract GeniusVaultTest is Test {
 
         // Add bridge liquidity
         vm.startPrank(ORCHESTRATOR);
+        // Transfer is safe in test context - we control the USDC mock contract
+        // forge-lint: disable-next-line(erc20-unchecked-transfer)
         USDC.transfer(address(VAULT), 500 ether);
 
         assertEq(

@@ -2,8 +2,6 @@
 pragma solidity ^0.8.17;
 
 import {Vm} from "forge-std/Vm.sol";
-import {EIP712} from "@openzeppelin/contracts/utils/cryptography/EIP712.sol";
-import {ECDSA} from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import {IAllowanceTransfer} from "permit2/interfaces/IAllowanceTransfer.sol";
 import {ISignatureTransfer} from "permit2/interfaces/ISignatureTransfer.sol";
 

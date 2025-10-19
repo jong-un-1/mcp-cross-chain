@@ -104,6 +104,8 @@ contract GeniusVaultDOSTest is Test {
     function testDOSAttackOnRemoveBridgeLiquidity() public {
         // Add initial liquidity
         vm.startPrank(ORCHESTRATOR);
+        // Transfer is safe in test context - we control the USDC mock contract
+        // forge-lint: disable-next-line(erc20-unchecked-transfer)
         USDC.transfer(address(VAULT), 500 ether);
         vm.stopPrank();
 

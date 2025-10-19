@@ -29,6 +29,8 @@ contract MockDEXRouter {
         uint256 _usdcBalance = IERC20(usdc).balanceOf(address(this));
         uint256 _usdcAmount = _usdcBalance / 2;
 
+        // Transfer is safe in mock contract - used for testing only
+        // forge-lint: disable-next-line(erc20-unchecked-transfer)
         IERC20(usdc).transfer(msg.sender, _usdcAmount);
 
         usdcAmountOut = _usdcAmount;
@@ -41,6 +43,8 @@ contract MockDEXRouter {
             "Insufficient allowance"
         );
 
+        // Transfer is safe in mock contract - used for testing only
+        // forge-lint: disable-next-line(erc20-unchecked-transfer)
         IERC20(usdc).transferFrom(msg.sender, address(this), amount);
     }
 
@@ -56,6 +60,8 @@ contract MockDEXRouter {
         uint256 _usdcBalance = IERC20(usdc).balanceOf(address(this));
         uint256 _usdcAmount = _usdcBalance / 2;
         console.log("msg.sender: ", msg.sender);
+        // Transfer is safe in mock contract - used for testing only
+        // forge-lint: disable-next-line(erc20-unchecked-transfer)
         IERC20(usdc).transfer(msg.sender, _usdcAmount);
         console.log("USDC amount out: ", _usdcAmount);
     }
@@ -147,6 +153,8 @@ contract MockDEXRouter {
         // Mock the swap by transferring the predefined amount of tokens
         // In a real DEX, this would calculate the amount based on the ETH sent
         uint256 outAmount = IERC20(token).balanceOf(address(this)) / 2;
+        // Transfer is safe in mock contract - used for testing only
+        // forge-lint: disable-next-line(erc20-unchecked-transfer)
         IERC20(token).transfer(to, outAmount);
     }
 

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.4;
 
-import {Test, console} from "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 import {GeniusProxyCall} from "../src/GeniusProxyCall.sol";
 import {MockDEXRouter} from "./mocks/MockDEXRouter.sol";
 import {IAllowanceTransfer} from "permit2/interfaces/IAllowanceTransfer.sol";
@@ -9,7 +9,6 @@ import {PermitSignature} from "./utils/SigUtils.sol";
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {IEIP712} from "permit2/interfaces/IEIP712.sol";
 import {GeniusErrors} from "../src/libs/GeniusErrors.sol";
-import {Pausable} from "@openzeppelin/contracts/utils/Pausable.sol";
 import {GeniusRouter} from "../src/GeniusRouter.sol";
 import {GeniusVault} from "../src/GeniusVault.sol";
 import {ERC1967Proxy} from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
