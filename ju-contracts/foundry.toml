@@ -6,9 +6,7 @@ gas_reports = ["*"]
 cbor_metadata = true
 optimizer = true
 optimizer_runs = 200
-remappings = [
-    "src/=src/"
-]
+via_ir = true
 
 
 [rpc_endpoints]
